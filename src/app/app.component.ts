@@ -183,7 +183,7 @@ export class AppComponent implements OnInit {
         path:google.maps.SymbolPath.CIRCLE,
         fillColor:`#0000ff`,
         strokeColor:'green',
-        scale:5,
+        scale:7,
       },
       draggable:false
     });
