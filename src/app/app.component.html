@@ -1,4 +1,12 @@
-<div class="d-flex justify-content-center mt-4">
+<div class="row">
+  <div class="col-md-12">
+    <div class="md-form">
+      <input mdbInput type="text" id="form1" class="form-control" placeholder="Enter Tracking Id" [(ngModel)]="trackingId" (keyup.enter)="getMapFromTrackingId(trackingId)">
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center mt-4" *ngIf="showMap">
+
   <!-- <div id="map" class="map"></div> -->
 
   <!-- <div class="form-group">
@@ -67,7 +75,7 @@
   <!-- <h5>Dispatched By: {{dispatchedBy}}</h5>
   {{destinationName}}  , {{currentPosName}} -->
 </div>
-<div class="mt-5 d-flex justify-content-center">
+<div class="mt-5 d-flex justify-content-center" *ngIf="showMap">
   <div class="">
     <div class="col-md-12 font-weight-bold largeText">
       {{drivername}} is En-Route

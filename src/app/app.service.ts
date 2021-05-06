@@ -5,11 +5,12 @@ import {HttpClient} from "@angular/common/http"
   providedIn: 'root'
 })
 export class AppService {
+  api_key = '569d44cbeaf04b2da798548564c40ec1'
 
   constructor(private http:HttpClient ) { }
 
-  getTimeSeries(){
-     return this.http.get('https://cco-telematics-apis.azure-api.net/dev/tele/status/3MW2MD?api_key=569d44cbeaf04b2da798548564c40ec1')
+  getTimeSeries(trackingId){
+     return this.http.get(`https://cco-telematics-apis.azure-api.net/dev/tele/status/${trackingId}?api_key=${this.api_key}`)
   }
 }
 

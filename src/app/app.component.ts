@@ -33,6 +33,7 @@ export class AppComponent implements OnInit {
   carName:string = 'Toyota';
   carNumber:string = 'EKY697AH'
   drivername:string;
+  trackingId:string;
 
   private geocoder;
 
@@ -67,6 +68,7 @@ export class AppComponent implements OnInit {
   destinationMarker: google.maps.Marker;
   totalDuration: string;
   driverEmail: string;
+  showMap: boolean = false;
 
   // tsr: any[] = [];
 
@@ -96,9 +98,9 @@ export class AppComponent implements OnInit {
     }
   }
 
-  async getTimeSeries(){
+  async getTimeSeries(trackingId){
 
-    const tsr = await this.appService.getTimeSeries().toPromise();
+    const tsr = await this.appService.getTimeSeries(trackingId).toPromise();
     console.log(tsr);
     const currentcoord = tsr[0].current_asset_position_coord;
     const curLatLng = currentcoord.split(",");
@@ -157,11 +159,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.markerLabel = { color: "#0fdfee", text: "Current Location" };
-    this.getTimeSeries();
+    // this.getTimeSeries();
 
     // this.setCurrentLocation();
     // this.initMap();
 
+  }
+
+  getMapFromTrackingId(trackingId){
+    this.showMap = true;
+    this.getTimeSeries(trackingId);
   }
 
   setDestinationMarker(latitude, longitiude){
