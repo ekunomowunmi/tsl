@@ -29,6 +29,10 @@ export class AppComponent implements OnInit {
   map : google.maps.Map;
   infoWindow: google.maps.InfoWindow;
   markerOption: google.maps.MarkerOptions;
+  customerName: string = 'Wisdom';
+  carName:string = 'Toyota';
+  carNumber:string = 'EKY697AH'
+  drivername:string;
 
   private geocoder;
 
@@ -61,6 +65,8 @@ export class AppComponent implements OnInit {
   originAddress: string;
   pngUrl: any;
   destinationMarker: google.maps.Marker;
+  totalDuration: string;
+  driverEmail: string;
 
   // tsr: any[] = [];
 
@@ -112,11 +118,14 @@ export class AppComponent implements OnInit {
     this.destinationLatitude = +destCoordSplit[0];
     this.destinationLongitude = +destCoordSplit[1];
     let destination = {lat:this.destinationLatitude, lng:this.destinationLongitude};
+    this.driverEmail = tsr[0].dispatched_by;
+    const getNameFromEmail = this.driverEmail.split("@",1);
+    this.drivername = getNameFromEmail[0];
     let date = new Date();
     date.setTime(tsr[0].duration_to_destination);
     const hour = date.getHours();
     const minute = date.getMinutes();
-    this.durationtoDestination = `${hour} hours, ${minute} minutes`;
+    this.durationtoDestination = `${hour} \n hours,\n ${minute} \n minutes`;
     this.setCurrentMarker(this.currentLatitude,this.currentLongitude);
     this.setDestinationMarker(this.destinationLatitude,this.destinationLongitude);
     this.setStartMarker(this.startLatitude,this.startLongitude);
@@ -165,7 +174,8 @@ export class AppComponent implements OnInit {
         icon:{
           url:'../assets/images/marker-blue.png',
           scale:1
-        }
+        },
+        label:this.durationtoDestination
 // icon: pngUrl,
     })
 
@@ -224,7 +234,7 @@ export class AppComponent implements OnInit {
       this.destinationAddress = response.destinationAddresses[0];
       this.originAddress = response.originAddresses[0];
       this.distance = response.rows[0].elements[0].distance.text;
-      this.durationtoDestination = response.rows[0].elements[0].duration.text;
+      this.totalDuration = response.rows[0].elements[0].duration.text;
       this.drawMinuteCircle(this.durationtoDestination)
       console.log(response,status)
     })
@@ -268,6 +278,7 @@ export class AppComponent implements OnInit {
   context.fillText(time,22,12);
 
   this.pngUrl = canvas.toDataURL("image/jpg");
+  console.log(this.pngUrl)
   }
 
   // createOnline() {
