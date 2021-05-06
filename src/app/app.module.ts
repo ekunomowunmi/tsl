@@ -10,6 +10,7 @@ import { AgmCoreModule, MapsAPILoader } from '@agm/core';
 import {IconsModule, MDBBootstrapModule} from 'angular-bootstrap-md';
 // For MDB Angular Free
 import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { NavbarModule, WavesModule, ButtonsModule } from 'angular-bootstrap-md'
     IconsModule,
     NavbarModule,
     WavesModule,
-    ButtonsModule
+    ButtonsModule,
+    FormsModule
     // MDBBootstrapModule.forRoot()
   ],
   providers: [AppService],
